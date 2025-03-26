@@ -1,44 +1,43 @@
 import React from 'react';
+import Container from '../../../Components/Common/Container/Container';
+import { Button, Button01 } from '../../../Components/Common/Button/Button';
+import { NavLink } from 'react-router-dom';
 
 const ProjectHeroSection = () => {
   return (
-    <div className="relative bg-transparent">
-      <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center max-w-screen-lg">
-        {/* Text Section */}
-        <div className="w-full lg:w-1/2 p-6 lg:p-10 text-center lg:text-left">
-          <h1 className="text-3xl font-bold text-indigo-600 sm:text-4xl lg:text-5xl">
-            Welcome To Our{' '}
-            <span className="text-indigo-600">Projects Page</span>
-          </h1>
-          <p className="mt-4 text-gray-600 text-base sm:text-lg">
-            This is a brief description of my project. It's amazing and you
-            should definitely check it out!
-          </p>
-          <div className="mt-6 flex justify-center lg:justify-start gap-4">
-            <a
-              href="#"
-              className="px-6 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
-            >
-              Get started
-            </a>
-            <a
-              href="#"
-              className="px-6 py-2 text-black bg-indigo-100 rounded-md hover:bg-indigo-200"
-            >
-              Learn more
-            </a>
-          </div>
-        </div>
+    <div className="">
+      <Container>
+        <div className='w-full py-24 flex items-center px-4 relative'>
+          {/* Text Section */}
+          <div className='w-full flex flex-col items-center sm:items-start'>
+            <div className="flex flex-col gap-2 my-6 text-5xl font-semibold sm:text-5.5xl md:text-7xl text-center sm:text-start">
+              <p>Build projects </p>
+              <p>like a team</p>
+            </div>
+            <p className="max-w-lg text-gray-500 dark:text-gray-400 text-center sm:text-start">
+              This is a brief description of my project. It's amazing and you should definitely check it out!
+            </p>
+            <div className="my-6 flex justify-center items-center sm:justify-start gap-4">
+              <NavLink to="/signup">
+                <Button01>Get Started</Button01>
+              </NavLink>
 
-        {/* Image Section */}
-        <div className="w-full lg:w-1/2">
-          <img
-            className="w-full h-auto object-cover rounded-md"
-            src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-            alt="Project"
-          />
+              <NavLink to="">
+                <Button disabled variant='secondary'>Watch Demo</Button>
+              </NavLink>
+            </div>
+          </div>
+
+          {/* Image Section */}
+          <div className='absolute right-0 -z-10 top-14'>
+            <img
+              className="h-[456px] object-cover rounded-md opacity-70"
+              src="./react.png"
+              alt="Project" />
+          </div>
+          <span className='bg-teal-400 h-[556px] lg:h-[956px] w-10 blur-[126px] md:-rotate-[30deg] -rotate-[20deg] absolute left-[50%] z-[999] -top-12'></span>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };

@@ -1,79 +1,77 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import ProjectHeroSection from './Hero/ProjectHeroSection';
+import Container from '../../Components/Common/Container/Container';
+import {Button} from '../../Components/Common/Button/Button';
+import projectData from '../../api/ProjectDetails.json';
 
 const Projects = () => {
     const navigate = useNavigate();
-
-    const ProjectsList = [
-        {
-            title: "Project No.1",
-            description:
-                "Project Description",
-            image: "https://img.icons8.com/color/144/000000/programming.png",
-            link: "/project-details", // Updated the link to navigate to the details page
-        },
-        {
-            title: "Project No.2",
-            description:
-                "Project Description",
-            image: "https://img.icons8.com/color/144/000000/programming.png",
-            link: "/project-details",
-        },
-        {
-            title: "Project No.3",
-            description:
-                "Project Description",
-            image: "https://img.icons8.com/color/144/000000/programming.png",
-            link: "/project-details",
-        },
-        // Add more projects as needed
-    ];
+    const { projects } = projectData;
 
     return (
         <>
-
             <ProjectHeroSection />
-            <section className="bg-black-50 py-10 px-5">
-                <div className="max-w-7xl mx-auto">
-                    <h2 className="text-center text-3xl font-bold text-yellow-500">PROJECTS</h2>
-                    <p className="text-center text-purple-900 mb-8">
-                        Here are some of the projects that we have worked on.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-14">
-                        {ProjectsList.map((item, index) => (
+            <Container>
+                <div className="px-4 pb-6">
+                    <div className='mb-10 space-y-2'>
+                        <p className='text-sm text-teal-500 font-semibold'>Featured</p>
+                        <h2 className="text-2xl font-semibold">Our Projects</h2>
+                        <p className="text-gray-500 dark:text-gray-400">
+                            Here are some of the projects that we have worked on.
+                        </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 justify-center gap-4">
+                        {projects.map((project) => (
                             <div
-                                key={index}
-                                className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden"
-                            >
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="w-full h-56 object-cover"
-                                />
-                                <div className="p-5">
-                                    <h3 className="text-lg font-semibold text-gray-800">
-                                        {item.title}
+                                key={project.id}
+                                className="bg-white/5 backdrop-blur-md p-5 h-fit shadow-xl border border-gray-300/50 dark:border-gray-700/50 rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300" >
+                                <div className=''>
+                                    <h3 className="text-xl font-medium text-gray-800 dark:text-white">
+                                        {project.title}
                                     </h3>
-                                    <p className="text-gray-600 mt-2 text-sm">{item.description}</p>
-                                    <a
-                                        href={item.link}
-                                        className="inline-block mt-4 px-6 py-2 text-yellow-500 bg-transparent rounded-3xl transition"
-                                    >
-                                        Ongoing
-                                    </a>
-                                    <button
-                                        onClick={() => navigate(item.link)} // Navigate to the project details page
-                                        className="inline-block mt-4 px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition"
-                                    >
-                                        View Details →
-                                    </button>
+                                </div>
+                                <div className='bg-blue-600 overflow-hidden h-44 my-2 rounded-2xl'>
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="w-full h-48 object-cover"
+                                    />
+                                </div>
+                                <div className='mt-4 flex flex-col justify-between h-40'>
+                                    <p className="text-gray-500 dark:text-gray-400 my-2">
+                                        {project.description.split(' ').slice(0, 12).join(' ') + '...'}
+                                    </p>
+
+                                    <div className='flex items-center justify-between'>
+                                        {/* User profile details of project owner. */}
+                                        <div className='flex items-center gap-2 cursor-pointer'>
+                                            <div className='flex items-center gap-2 bg-gray-300 dark:bg-gray-00 h-10 w-10 overflow-hidden rounded-full'>
+                                                <img
+                                                    src={project.userImage}
+                                                    alt={project.userName}
+                                                    className="w-12 h-12 scale-105" />
+                                            </div>
+                                            <div>
+                                                <p className='font-medium text-sm text-gray-800 dark:text-gray-400'>{project.userName || 'Unknown'}</p>
+                                                <p className='text-xs  text-gray-500'>{project.userRole || 'Not Specified'}</p>
+                                            </div>
+                                        </div>
+
+                                        <Button
+                                            onClick={() => navigate(`/projects/details/${project.id}`)}
+                                            variant='secondary'
+                                        >
+                                            Read More
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
-            </section>
+            </Container>
         </>
     );
 };
